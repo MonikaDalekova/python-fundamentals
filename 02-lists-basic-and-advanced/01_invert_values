@@ -1,0 +1,7 @@
+def opposite(a):
+    result = [(int(el)*(-1)) for el in current_string]
+    print(result)
+
+
+current_string = input().split()
+opposite(current_string)
