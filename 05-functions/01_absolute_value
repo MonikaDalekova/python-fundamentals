@@ -1,0 +1,2 @@
+nums_as_int = [abs(float(number)) for number in input().split()]
+print(nums_as_int)
