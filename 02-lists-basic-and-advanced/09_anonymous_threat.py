@@ -1,25 +1,38 @@
+def merge(command, my_list):
+    startIndex = int(command[1])
+    endIndex = int(command[2])
+    if startIndex < 0:
+        startIndex = 0
+    elif endIndex > len(my_list)-1:
+        endIndex = len(my_list)-1
+    merged_part = ''.join(my_list[startIndex:endIndex+1])
+    my_list[startIndex:endIndex+1] = [merged_part]
+    return my_list
+
+
+def divide(command, my_list):
+    index = int(command[1])
+    partitions = int(command[2])
+    divided_partitions = []
+    element = my_list[index]
+    partition_length = len(element) // partitions
+    for current_element_index in range(partitions):
+        if current_element_index != partitions - 1:
+            divided_partitions.append(element[current_element_index * partition_length: (current_element_index + 1)\
+                                                                                        * partition_length])
+        else:
+            divided_partitions.append(element[current_element_index * partition_length:])
+    my_list[index:index + 1] = divided_partitions
+    return my_list
+
+
 initial_string = input().split()
-
-while True:
-    current_command = input().split()
-
-    if current_command[0] == "3:1":
-        break
-
-    if current_command[0] == "merge":
-        startIndex = int(current_command[1])
-        endIndex = int(current_command[2])
-        if startIndex < 0:
-            startIndex = 0
-        if endIndex > len(initial_string) - 1:
-            endIndex = len(initial_string) - 1
-        merged_parts = "".join(initial_string[startIndex:endIndex+1])
-        initial_string[startIndex:endIndex+1] = [merged_parts]
-    elif current_command[0] == "divide":
-        index = int(current_command[1])
-        partitions = int(current_command[2])
-        element = initial_string[index]
-
-
-            print(current_string)
-
+command = input()
+while command != "3:1":
+    command = command.split()
+    if command[0] == "merge":
+        initial_string = merge(command, initial_string)
+    elif command[0] == "divide":
+        initial_string = divide(command, initial_string)
+    command = input()
+print(*initial_string, sep=" ")
