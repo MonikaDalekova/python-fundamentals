@@ -1,8 +1,6 @@
-# не е вярна
-
 def exchange(command, list_of_integers):
     index = int(command[1])
-    if index > len(list_of_integers) or index < 0:
+    if not 0 <= index < len(list_of_integers):
         print("Invalid index")
     else:
         list_of_integers = list_of_integers[index+1:] + list_of_integers[:index+1]
@@ -11,106 +9,51 @@ def exchange(command, list_of_integers):
 
 def max_number(command, list_of_integers):
     side = command[1]
-    list_index = []
-    if side == "even":
-        for index, number in enumerate(list_of_integers):
-            if number % 2 == 0 and number == max(list_of_integers):
-                if list_of_integers.count(max(list_of_integers)) > 0:
-                    list_index.append(index)
-        if len(list_index) >= 0:
-            print(list_index[-1])
-        else:
-            print("No matches")
-    elif side == "odd":
-        for index, number in enumerate(list_of_integers):
-            if number % 2 != 0 and number == max(list_of_integers):
-                if list_of_integers.count(max(list_of_integers)) > 0:
-                    list_index.append(index)
-        if len(list_index) > 0:
-            print(list_index[-1])
-        else:
-            print("No matches")
+    even_list = [int(x) for x in list_of_integers if x % 2 == 0]
+    odd_list = [int(x) for x in list_of_integers if x % 2 != 0]
+    if side == "even" and even_list:
+        print((len(list_of_integers) - list_of_integers[::-1].index(max(even_list)) - 1))
+    elif side == "odd" and odd_list:
+        print((len(list_of_integers) - list_of_integers[::-1].index(max(odd_list)) - 1))
+    else:
+        print("No matches")
 
 
 def min_number(command, list_of_integers):
     side = command[1]
-    list_index = []
-    if side == "even":
-        for index, number in enumerate(list_of_integers):
-            if number % 2 == 0 and number == min(list_of_integers):
-                if list_of_integers.count(min(list_of_integers)) > 0:
-                    list_index.append(index)
-        if len(list_index) > 0:
-            print(list_index[-1])
-        else:
-            print("No matches")
-    elif side == "odd":
-        for index, number in enumerate(list_of_integers):
-            if number % 2 != 0 and number == min(list_of_integers):
-                if list_of_integers.count(min(list_of_integers)) > 0:
-                    list_index.append(index)
-        if len(list_index) > 0:
-            print(list_index[-1])
-        else:
-            print("No matches")
+    even_list = [int(x) for x in list_of_integers if x % 2 == 0]
+    odd_list = [int(x) for x in list_of_integers if x % 2 != 0]
+    if side == "even" and even_list:
+        print((len(list_of_integers) - list_of_integers[::-1].index(min(even_list)) - 1))
+    elif side == "odd" and odd_list:
+        print((len(list_of_integers) - list_of_integers[::-1].index(min(odd_list)) - 1))
+    else:
+        print("No matches")
 
 
 def first(command, list_of_integers):
-    count = int(command[1])
-
-    if command[2] == "even":
-        if count > len(list_of_integers):
-            print("Invalid count")
+    even_list = [int(x) for x in list_of_integers if x % 2 == 0]
+    odd_list = [int(x) for x in list_of_integers if x % 2 != 0]
+    if 0 < int(command[1]) <= len(list_of_integers):
+        if command[2] == "even":
+            print(even_list[0:int(command[1])])
         else:
-            even_list = list(filter(lambda x: x % 2 == 0, list_of_integers))
-            if len(even_list) < count:
-                print(even_list)
-            elif len(even_list) == 0:
-                print("[]")
-            else:
-                while len(even_list) > count:
-                    even_list.pop()
-                print(even_list)
-
-    elif command[2] == "odd":
-        if count > len(list_of_integers):
-            print("Invalid count")
-        else:
-            odd_list = list(filter(lambda x: x % 2 != 0, list_of_integers))
-            if len(odd_list) < count:
-                print(odd_list)
-            elif len(odd_list) == 0:
-                print("[]")
-            else:
-                while len(odd_list) > count:
-                    odd_list.pop()
-                print(odd_list)
+            print(odd_list[0:int(command[1])])
+    else:
+        print(f"Invalid count")
 
 
 def last(command, list_of_integers):
-    count = int(command[1])
-    if command[2] == "even":
-        if count > len(list_of_integers):
-            print("Invalid count")
+    even_list = [int(x) for x in list_of_integers if x % 2 == 0]
+    odd_list = [int(x) for x in list_of_integers if x % 2 != 0]
+    if 0 < int(command[1]) <= len(list_of_integers):
+        if command[2] == "even":
+            print(even_list[-int(command[1]):])
         else:
-            even_list = list(filter(lambda x: x % 2 == 0, list_of_integers))
-            if len(even_list) < count:
-                print(even_list)
-            elif len(even_list) == 0:
-                print("[]")
-            else:
-                print(even_list[-count])
-    elif command[2] == "odd":
-        if count > len(list_of_integers):
-            print("Invalid count")
-        else:
-            odd_list = list(filter(lambda x: x % 2 != 0, list_of_integers))
-            if len(odd_list) < count:
-                print(odd_list)
-            elif len(odd_list) == 0:
-                print("[]")
-            else:
-                print(odd_list[-count])
+            print(odd_list[-int(command[1]):])
+    else:
+        print(f"Invalid count")
+
 
 
 list_of_integers = [int(x) for x in input().split()]
