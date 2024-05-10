@@ -1,0 +1,13 @@
+n = int(input())
+for sentence in range(n):
+    text = input()
+
+    start_name_index = text.index("@") + 1
+    last_name_index = text.index("|")
+    start_age_index = text.index("#") + 1
+    last_age_index = text.index("*")
+
+    name = text[start_name_index:last_name_index]
+    age = text[start_age_index:last_age_index]
+
+    print(f"{name} is {age} years old.")
